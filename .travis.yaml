@@ -1,0 +1,19 @@
+branches:
+  only:
+    - master
+    - /^v\d+\.\d+\.\d+$/
+
+os:
+  - linux
+  - osx
+
+sudo: false
+
+before_script:
+  - npm install -g gulp
+script: gulp travis
+
+language: node_js
+node_js:
+  - "5.1"
+  - "5"
