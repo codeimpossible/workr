@@ -4,7 +4,7 @@
   "description": "a worker for proggr",
   "main": "index.js",
   "scripts": {
-    "test": "gulp mocha"
+    "test": "gulp test"
   },
   "keywords": [
     "proggr",
