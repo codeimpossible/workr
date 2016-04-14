@@ -37,6 +37,8 @@
   },
   "dependencies": {
     "joi": "8.0.5",
+    "mongodb": "2.1.16",
+    "mongoose": "4.4.12",
     "nodegit": "0.12.2",
     "orchestrator": "0.3.7"
   }
