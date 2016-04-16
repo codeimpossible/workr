@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "a worker for proggr",
   "main": "index.js",
+  "bin": {
+    "workr": "./bin/workr.js"
+  },
   "scripts": {
     "test": "gulp test"
   },
@@ -36,10 +39,13 @@
     "sinon-chai": "2.8.0"
   },
   "dependencies": {
+    "async": "2.0.0-rc.3",
     "joi": "8.0.5",
     "mongodb": "2.1.16",
     "mongoose": "4.4.12",
     "nodegit": "0.12.2",
-    "orchestrator": "0.3.7"
+    "orchestrator": "0.3.7",
+    "readdirp": "2.0.0",
+    "sloc": "0.1.10"
   }
 }
