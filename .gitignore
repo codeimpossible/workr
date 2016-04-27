@@ -33,4 +33,10 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
+# ignore tmp dir
+# workr code will checkout other git repos here
 tmp/
+
+# ignore the report dir since istanbul will push
+# the code coverage reports here
+report/

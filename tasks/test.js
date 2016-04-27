@@ -5,10 +5,29 @@ const mocha = require('gulp-mocha');
 const istanbul = require('gulp-istanbul');
 const isparta = require('isparta');
 
-// // Transform all required files with Babel
-// require('babel-register');
+let testOptions = {
+  mochaOpts: {
+    require: ['./specs/setup'],
+    timeout: 60000,
+    // Allow TeamCity to override with custom reporter
+    reporter: process.env.MOCHAREPORTER || 'spec',
+  },
+  istanbulOpts: {
+    thresholds: {
+      global: 0
+    },
+  },
+  subtasks: {
+    integration: {
+      glob: '**/*-integrations.js',
+    },
+    func: {
+      glob: '**/*-specs.js',
+    }
+  }
+};
 
-gulp.task('pre-test', () => {
+gulp.task('test:warmup', () => {
   return gulp.src([
       'lib/**/*.js',
       '!**/__specs__/**/*.js'
@@ -25,33 +44,17 @@ gulp.task('pre-test', () => {
     .pipe(istanbul.hookRequire());
 });
 
-gulp.task('test', ['pre-test'], () => {
-  return gulp.src('**/*-specs.js', {
-    read: false,
-  })
-  .pipe(mocha({
-    require: ['./specs/setup'],
-    // Allow TeamCity to override with custom reporter
-    reporter: process.env.MOCHAREPORTER || 'spec',
-  }))
-  // Creating the reports after tests run
-  .pipe(istanbul.writeReports())
-  .pipe(istanbul.enforceThresholds({
-    thresholds: {
-      global: 0
-    },
-  }));
-});
+for(let task in testOptions.subtasks) {
+  let def = testOptions.subtasks[task];
+  gulp.task(`test:${task}`, ['test:warmup'], () => {
+    return gulp.src(def.glob, { read: false })
+               .pipe(mocha(testOptions.mochaOpts))
+               .pipe(istanbul.writeReports())
+               .pipe(istanbul.enforceThresholds(testOptions.istanbulOpts));
+  });
 
-// Task for running tests without code coverage; intended only for getting
-// more accurate line numbers for debugging test errors
-gulp.task('test-debug', () => {
-  return gulp.src('**/*-specs.js', {
-    read: false,
-  })
-  .pipe(mocha({
-    require: ['./specs/setup'],
-    // Allow TeamCity to override with custom reporter
-    reporter: process.env.MOCHAREPORTER || 'spec',
-  }));
-});
+  gulp.task(`test:${task}:debug`, () => {
+    return gulp.src(def.glob, { read: false })
+               .pipe(mocha(testOptions.mochaOpts))
+  });
+}
