@@ -7,7 +7,7 @@
     "workr": "./bin/workr.js"
   },
   "scripts": {
-    "test": "gulp test"
+    "test": "node ./node_modules/.bin/gulp test:func test:integration"
   },
   "keywords": [
     "proggr",
