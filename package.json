@@ -7,6 +7,14 @@
     "workr": "./bin/workr.js"
   },
   "scripts": {
+    "init": "node ./scripts/init-dev.js",
+    "bin": "node ./bin/workr.js",
+    "gulp": "gulp",
+    "functional": "gulp test:func",
+    "functional:debug": "node debug ./node_modules/gulp/bin/gulp.js  test:func:debug",
+    "integration": "gulp test:integration",
+    "integration:debug": "node debug ./node_modules/gulp/bin/gulp.js test:integration:debug",
+    "test:debug": "node-inspector ./node_modules/gulp/bin/gulp.js test:func test:integration",
     "test": "node ./node_modules/.bin/gulp test:func test:integration"
   },
   "keywords": [
@@ -32,6 +40,8 @@
     "gulp-istanbul": "0.10.4",
     "gulp-mocha": "2.2.0",
     "isparta": "4.0.0",
+    "mkdirp": "^0.5.1",
+    "node-inspector": "^0.12.8",
     "require-dir": "0.3.0",
     "rimraf": "2.5.2",
     "sinon": "1.17.3",
@@ -46,6 +56,7 @@
     "nodegit": "0.12.2",
     "orchestrator": "0.3.7",
     "readdirp": "2.0.0",
-    "sloc": "0.1.10"
+    "sloc": "0.1.10",
+    "yargs": "^6.6.0"
   }
 }
