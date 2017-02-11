@@ -1,4 +1,0 @@
-{
-  "tmp": "./tmp",
-  "mongo": "mongodb://<dbuser>:<dbpassword>@ds021010.mlab.com:21010/workr_test"
-}
