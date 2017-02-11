@@ -40,3 +40,6 @@ tmp/
 # ignore the report dir since istanbul will push
 # the code coverage reports here
 report/
+
+# ignore the configuration file
+config.json
