@@ -8,7 +8,7 @@ const isparta = require('isparta');
 let testOptions = {
   mochaOpts: {
     require: ['./specs/setup'],
-    timeout: 60000,
+    timeout: 600000,
     // Allow TeamCity to override with custom reporter
     reporter: process.env.MOCHAREPORTER || 'spec',
   },
