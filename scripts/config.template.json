@@ -1,0 +1,4 @@
+{
+  "tmp": "./tmp",
+  "mongo": "<your_mongo_connection_string_here>"
+}
