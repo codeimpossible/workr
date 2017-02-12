@@ -3,7 +3,6 @@
 
 const rd = require('require-dir');
 const svcs = rd('./../lib/svcs');
-// const jobs = rd('./../jobs');
 const path = require('path');
 const root = path.resolve(__dirname, '..');
 const pkg = require('./../package.json');
@@ -41,17 +40,26 @@ const cleanseArgv = (args) => {
   return n;
 };
 
-const Job = require(path.resolve(root, `./lib/jobs/${argv.job}`));
-const JobArgs = require(path.resolve(root, './lib/jobs/job-args'));
-const jobArgs = new JobArgs(cleanseArgv(argv));
+if (argv.job) {
+  const Job = require(path.resolve(root, `./lib/jobs/${argv.job}`));
+  const JobArgs = require(path.resolve(root, './lib/jobs/job-args'));
+  const jobArgs = new JobArgs(cleanseArgv(argv));
 
-const action = new Job({ jobArgs });
+  const action = new Job({ jobArgs });
 
-action.run().then( result => {
-  console.log('done!');
-  console.log(result);
-  process.exit();
-})
-.catch( err => {
-  console.error(err.stack);
-});
+  action.run().then( result => {
+    console.log('done!');
+    console.log(result);
+    process.exit();
+  })
+  .catch( err => {
+    console.error(err.stack);
+  });
+} else {
+  process.stdout.write('registering client...');
+  svcs['workr-client'].register().then(() => {
+    process.stdout.write('done!\n');
+  }).catch( err => {
+    console.error(err.stack);
+  });
+}

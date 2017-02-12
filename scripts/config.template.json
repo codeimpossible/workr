@@ -1,4 +1,5 @@
 {
+  "client_id": "{worker_client_id}",
   "tmp": "./tmp",
   "mongo": "<your_mongo_connection_string_here>"
 }
