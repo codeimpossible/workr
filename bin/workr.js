@@ -38,7 +38,6 @@ const cleanseArgv = (args) => {
     p[i] = args[i];
     n = Object.assign(p, n);
   });
-  console.log(argv, n);
   return n;
 };
 
@@ -50,6 +49,8 @@ const action = new Job({ jobArgs });
 
 action.run().then( result => {
   console.log('done!');
+  console.log(result);
+  process.exit();
 })
 .catch( err => {
   console.error(err.stack);
