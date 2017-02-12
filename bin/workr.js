@@ -26,6 +26,9 @@ const argv = yargs.usage('$0 <cmd> [args]')
   .command('sloc [url]', 'counts source lines of code from a cloned reopository', undefined, (argv) => {
     argv.job = 'sloc';
   })
+  .command('hash [url]', 'generates filehashes for each commit within a cloned reopository', undefined, (argv) => {
+    argv.job = 'hash';
+  })
   .help()
   .argv;
 
