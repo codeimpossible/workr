@@ -24,6 +24,9 @@ const argv = yargs.usage('$0 <cmd> [args]')
   .command('import [url]', 'imports commits from a cloned reopository', undefined, (argv) => {
     argv.job = 'import';
   })
+  .command('sloc [url]', 'counts source lines of code from a cloned reopository', undefined, (argv) => {
+    argv.job = 'sloc';
+  })
   .help()
   .argv;
 
